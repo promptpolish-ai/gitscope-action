@@ -1,64 +1,40 @@
-# GitScope GitHub Action 📊
+# 🏥 GitScope Repo Health Action
 
-Generate **beautiful HTML reports** from any git repository — directly in your CI/CD pipeline.
+Automatically add a **live repo health badge** to your GitHub README.
 
-[![GitScope](https://img.shields.io/badge/GitScope-Micro-%241-brightgreen)](https://gitscope-micro.vercel.app)
-[![GitScope Pro](https://img.shields.io/badge/GitScope-Pro-%245-purple)](https://gitscope-pro.vercel.app)
+## Usage
 
-## 🚀 Quick Start
-
-Add this to `.github/workflows/report.yml`:
+Create `.github/workflows/gitscope.yml`:
 
 ```yaml
-name: GitScope Report
-
+name: GitScope Badge
 on:
   push:
-    branches: [main]
-  workflow_dispatch:
+    branches: [main, master]
+  schedule:
+    - cron: '0 0 * * 1'  # Weekly
 
 jobs:
-  report:
+  badge:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      
-      - name: Generate Report
-        uses: promptpolish-ai/gitscope-action@v1
+      - uses: promptpolish-ai/gitscope-action@v1
 ```
 
-That's it! Every push generates a beautiful HTML report of your repository.
+## What it does
 
-## 🎨 Features
+Adds this badge to your README:
 
-- **Zero configuration** — works with any repo
-- **Beautiful design** — typography, layout, dark mode
-- **Rich stats** — commits, contributors, languages
-- **CI/CD native** — runs in your GitHub Actions pipeline
-- **Artifact upload** — report available as build artifact
+[![Repo Health](https://gitscope-micro.vercel.app/api/badge?repo=promptpolish-ai/gitscope-action)](https://gitscope-micro.vercel.app/api/deliver?repo=promptpolish-ai/gitscope-action)
 
-## 💰 Premium Templates
+The badge shows your repo's health score (0-100) and updates every time the action runs.
 
-Get **5 premium report templates** for **$5 BTC**:
+## Why?
 
-| Template | Description |
-|----------|-------------|
-| **Timeline** | Chronological commit visualization |
-| **Heatmap** | Contribution intensity map |
-| **Authors** | Individual contributor reports |
-| **Stats** | Repository analytics dashboard |
-| **Changelog** | Automated release notes generator |
-
-```
-BTC: 1DQXcKwN95AWqwmwbscG7fRbEYMdWU9GB3
-```
-
-## 📄 License
-
-MIT — open source, free for all repos.
+- **Free** - No cost, no signup
+- **Live** - Updates with your code
+- **Shareable** - Shows your maintainers you care about quality
 
 ---
 
-Made with ❤️ by [GitScope](https://gitscope-micro.vercel.app)
+*Powered by [GitScope](https://gitscope-micro.vercel.app) — free repo analysis*
