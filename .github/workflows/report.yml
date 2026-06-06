@@ -1,0 +1,30 @@
+name: GitScope Report
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Generate GitScope Report
+        uses: promptpolish-ai/gitscope-action@v1
+        with:
+          output-path: './report.html'
+          theme: 'dark'
+      
+      - name: Deploy Report to Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './report.html'
+      
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
